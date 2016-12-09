@@ -1,0 +1,120 @@
+\section{Theory of Surface}
+Let $S \hookrightarrow \R^{n}$. Recall the definition of a differential map of a function $f: U \hookrightarrow \R^k \rightarrow \R^n$. $f'(p)$ is a linear transformation such that \[f(p+h) - f(p) = f'(p)h + o(h),\] and is usually denoted by $f'(p) = Df(p) = df(p) = f_{*p}$. 
+
+\begin{fact}
+	If $f \in C^{1}$ ($\iff f^i \in C^1$), then its differential map is given by its Jacobian matrix \[f'(p) = \para{\pardiff{f^i}{u^j}(p)}.\]
+\end{fact}
+
+\begin{fact}
+	By inverse function theorem, for $f \in C^1(\R^k, \R^n)$, $f$ is locally invertible $\iff$ $f'(p)$ is invertible.
+\end{fact}
+
+\begin{fact}
+	The following ways of representing a $k$-surface are equivalent:
+	\begin{enumerate}
+		\item[(i)]Gragh: $\vr(u^1, \dots, u^k) = (x^1(u^1,\dots,u^k), \dots, x^n(u^1,\dots,u^k))^t$, where $x^1 = u^1, \dots, x^k = u^k$ and $ x^j = g^j(u^1, \dots, u^k) \in C^1, j = k+1, \dots, n$.
+		\item[(ii)]Level set: $F: V \hookrightarrow \R^k \rightarrow \R^n$ such that $F'(p) \in M_{n-k, k}(\R)$ has rank $n-k$.
+		\item[(iii)]Parametrization (co-ordinatization): $f:U \hookrightarrow \R^k \rightarrow \R^n$ with $f(u^1, \dots, u^k) = (x^1, \dots, x^n)$ such that $f'(p)$ has rank $k$. (Note that the graph is merely a special case of parametrization that takes $x^1, \dots, x^k$ as parameters.)
+	\end{enumerate}
+\end{fact}
+
+\begin{fact}
+	Let $\alpha(t) = \alpha(u^1(t), \dots, u^k(t))$ be a curve on the $k$-surface $S$ and $\vkt{v}$ be the tangent vector of the curve at point $p$. Then,
+	\[df_p(\vkt{v}) = D_{\vkt{v}}f(p) = (\alpha^i)'\pardiff{f}{u^i},\]
+	where $D_{\vkt{v}}$ denotes the directional derivative along $\vkt{v}$. Here the summation conforms to the Einstein's convention. 
+\end{fact}
+
+One can observe the mapping $\vkt{v} \mapsto df_p(\vkt{v})$ corresponds to the well-known chain rule in calculus. We can furthur illustrate this by taking two surfaces $S_1$ and $S_2$ embedded in $\R^n$, and a curve $\alpha(t)$ in $U \hookrightarrow \R^k$. If $f:U \rightarrow S_1$ be the parametrization of $S_1$ and $F: S_1 \rightarrow S_2$, then there is a corresponding curve $\beta = f \circ \alpha$ on $S_1$, with the induced tangent map at $q=f(\alpha(0)) \in S_1$, $F'(q) (= dF_q = F_{*q}): T_qS_1 \rightarrow T_{F(q)}S_2$. Put $\vkt{v} = \beta'(0)$. \[dF_{q}(\vkt{v}) = (F \circ \beta)'|_{t = 0} = (F \circ f \circ \alpha)'|_{t = 0} = (F \circ f)'(\alpha(0)) \alpha'(0).\] The correspondence with chain rule is hence readily seen.
+
+(Diagram to be inserted.)
+%\import{img}{}
+
+\subsection{The first fundamental form}
+Given a surface $S \hookrightarrow \R^n$ and a curve $\beta(t) = \vr(u^1(t), \dots, u^k(t))$ on it. Knowing that the length of a curve is defined as $l(\gamma) = \int_{\gamma} \inner{\gamma'}{\gamma'}$, mathematicians realize the inner product is what the concept of length (as well as area) is based on. The computation shows that
+\[|\beta'(t)|^2 = \inner{\beta'(t)}{\beta'(t)} = \inner{\vr_i\diff{u^i}{t}}{\vr_j\diff{u^j}{t}} = \inner{\vr_i}{\vr_j}\diff{u^i}{t} \diff{u^j}{t},\]
+where the subscript denotes partial differentiation with respect to specific variable. Once again, the Einstein's convention is assumed. We observe that the quantity $\inner{\vr_i}{\vr_j}$ is independent of the choice of curve $\beta$, and is invariant as long as the parametrization of surface $\vr(u^1, \dots, u^k)$ is given. Thus we define $g_{ij} = \inner{\vr_i}{\vr_j}$ to be the \emph{metric} of the surface with respect to this very coordinate, and please be aware that $g_{ij}$ is a function of the point on the plane. To emphasize the independency of the curve chosen, one often use the expression
+\[ dl^2 = g_{ij} du^i du^j. \]
+
+\begin{definition}
+	(The first fundamental form) Let $g_{ij}$ be a metric given to a surface $S$ and $G = (g_{ij})$ (notice that $G$ is a symmetric matrix). Then the quadratic form of a vector $\vkt{v}$ defines the norm on the tangent plane of a point $p$ on $S$, i.e. $|\vkt{v}|^2 = \vkt{v}^t G \vkt{v}$ for all $\vkt{v} \in T_pS$. The quadratic form is usually refered by the first fundamental form of the surface. In particular, if $S \hookrightarrow \R^3$ and parametrized by $\vr(u, v)$, one often write \[dl^2 = Edu^2 + 2Fdudv + Gdv^2,\] where $E = g_{11}, F = g_{12} = g_{21}$ and $G = g_{22}$ (not to be confused with the matrix).
+\end{definition}
+
+\begin{definition}
+	(Inner product on the tangent space) The inner product of two vectors $\vkt{\xi}$ and $\vkt{\eta}$ on the tangent plane $T_pS$ is defined by the bilinear form \[ \inner{\vkt{\xi}}{\vkt{\eta}}= \vkt{I}_{p}(\vkt{\xi}, \vkt{\eta}) = g_{ij}(p) \vkt{\xi}^i \vkt{\eta}^j. \]
+\end{definition}
+
+Now we investigate the area on the surface. First we restrict us to the three dimensional case. Let $\vr(u, v): U \hookrightarrow \R^2 \rightarrow \R^3$ be the parametrization of the surface. We can utilize what we learn in the calculus that the area of parallelogram spanned by $\vr_u$ and $\vr_v$ is $|\vr_u \times \vr_v|$. Also notice that we have the relation \[ |\vr_u \times \vr_v|^2 = |\vr_u|^2|\vr_v|^2 - |\inner{\vr_u}{\vr_v}|^2, \] which exactly coincides with $\det G = g_{11}g_{22} - 2g_{12}$. Thus, it is natural to write
+\[ A(S) = \int_{U} \sqrt{\det G} ~ dudv. \]
+
+\begin{theorem}
+	The surface area of $n$-dimensional surface $\vr(u^1, \dots, u^k): U \hookrightarrow \R^k \rightarrow \R^n$ is given by
+	\begin{equation}
+		\int_{U} \sqrt{\det G} ~ du^1 du^2 \dots du^k
+	\end{equation}
+	\label{eq:area}
+\end{theorem}
+\begin{proof}
+	proof to be inserted.
+\end{proof}
+
+\subsection{The second fundamental form}
+Having studied the length and area induced on a surface, we know that these are still not enough for our purpose. To fully understand the behaviour of a surface, we need to study further how it bends in a multidimensional space. With this goal in mind one will be lead to the construction of the concept of curvature and normal vectors, as what we have done in the theory of curves. 
+
+Consider a smooth curve $\vkt{x} = \vr(u^1(t), \dots, u^k(t))$ on the surface $S$. If we take its second derivative, we will have \[\vkt{x}'' = \vr_{ij}\diff{u^i}{t} \diff{u^j}{t} + \vr_k \frac{d^2 u^k}{dt^2}.\] Let $\vkt{x}''$ be dotted by the unit normal vector at $p$. Then, \[\inner{\vkt{x}''}{N(p)} dt^2 = \inner{\vr_{ij}}{N(p)}du^idu^j.\] Note one can simply assume the curve is parametrized by the arc length $t = l$. In this investigation we discover that the bending behaviour of a curve embedded in this surface sujects to certain properties of $S$, namely the curve-independent term $\inner{\vr_{ij}}{N(p)}$.
+
+\begin{definition}
+	(Gauss map) Let $S$ be an orientable surface embedded in $\R^n$. Define the map $N(p): S \rightarrow S^{n-1}$, where $S^{n-1}$ denotes the unit spherical surface in $\R^n$, by designating an unit normal vector to every point on $S$.
+\end{definition}
+
+Now we turn to the differential of Gauss map. Physically, we can view this vector quantity $dN_p(\vkt{v})$ as the infinitesimal variance of the normal vector at point $p$ while moving $p$ by a very small amount in the direction of $\vkt{v}$. In other words, $dN_p(\vkt{v})$ is the directional derivative of $N_p$ along $\vkt{v}$, or, generally speaking, a linear transformation from $T_pS$ to $T_{N(p)}S^{n-1}$. If we identify $T_{N(p)}S^{n-1}$ with $T_{p}S$ ($\because T_{N(p)}S^{n-1} \cong T_{p}S$), then $dN_p$ turns into a endomorphism on $T_{p}S$. Moreover, $dN_p$ is adjoint, which is justified by the following theorem.
+
+\begin{theorem}
+	The differential of the Gauss map at $p$, $dN_p: T_pS \rightarrow T_pS$, is a self-adjoint endomorphism, i.e. for $\vkt{v}, \vkt{w} \in T_pS, \inner{dN_p(\vkt{v})}{\vkt{w}} = \inner{\vkt{v}}{dN_p(\vkt{w})}$.
+	\label{thm:gauss_adjoint}
+\end{theorem} 
+
+\begin{proof}
+	Let $\vr(u^1, \dots, u^k)$ be the parametrization of $S$. At a non-singular point $p \in S$, the tangent space $T_pS$ is spanned by the basis $\{\vr_1, \dots, \vr_k\}$. Observe that
+	\[ \inner{dN_p(\vr_i)}{\vr_j} = \inner{\pardiff{N}{u^i}}{\vr_j}_{\vr = p} = \pardiff{ }{u^i}\inner{N}{\vr_j} - \inner{N}{\vr_{ij}} = - \inner{N}{\vr_{ij}}. \]
+	Hence $\inner{dN_p(\vr_i)}{\vr_j} = \inner{\vr_i}{dN_p(\vr_j)}$ for all $i, j$, since $\vr_{ij} = \vr_{ji}$ ($\vr \in C^{\infty}$). Then the general case follows by expanding arbitrary vectors $\vkt{v}, \vkt{w} \in T_pS$ with respect to $\{\vr_1, \dots, \vr_k\}$.
+\end{proof}
+
+
+\begin{definition}
+	(The Second Fundamental Form) Let $\vkt{II}_{p}(\vkt{v}, \vkt{w}) = -\inner{dN_p(\vkt{v})}{\vkt{w}}$. Define $b_{ij} = \vkt{II}_p(\vr_i, \vr_j) = \inner{\vr_{ij}}{N(p)}$, and the matrix $Q = (b_{ij})$. Then the second fundamental form is defined to be the quadratic form $\inner{\vkt{x}''}{N(p)}dl^2 = b_{ij}du^i du^j = (d\vkt{x})^tQ(d\vkt{x}),~ i,j = 1, 2, \dots, k $. In particular, if $S$ is a $2$-dimensional surface in $3$-dimensional space and is parametrized by $(u, v)$, then one often writes \[\inner{\vkt{x}''}{N(p)} dt^2 = Ldu^2+ 2Mdudv + Ndv^2.\]
+\end{definition}
+
+One should notice, in the three-dimensional case, if the embedded curve being discussed, $\vkt{x}$, is parametrized by arc length, then the second derivative $\vkt{x}''(l)$ is exactly $\kappa\vkt{n}$, whence on can further deduce \[\kappa \cos\theta dl^2 = Ldu^2+ 2Mdudv + Ndv^2,\] where $\theta$ is the angle between $\vkt{n}$ and $N(p)$. Subtitute the first fundamental form into $dl^2$, we get
+\[\kappa \cos\theta = \frac{Ldu^2+ 2Mdudv + Ndv^2}{Edu^2 + 2Fdudv + Gdv^2} = \frac{b_{ij} du^idu^j}{g_{ij} du^idu^j}\]
+
+Let's return to the differential Gauss map. We confine ourself in $\R^3$. Set $S_p = -dN_p$. From Thm. \ref{thm:gauss_adjoint} we have known that $S_p$ is self-adjoint, which means we can pick an orthonormal basis of $T_pS$ fully comprised of the eigenvectors of $S_p$, say $\vkt{v}_1$ and $\vkt{v}_2$ with corresponding eigenvalue $\kappa_1$ and $\kappa_2$. $\kappa_1$ and $\kappa_2$ are defined to be the principle curvature of $S$, and their unit eigenvectors are called the principal direction. As an exercise, it can be shown that the matrix representation of $S_p$ relative the basis $\vr_1, \vr_2$ is $(g_{ij})^{-1}(b_{ij})$, where \[ (g_{ij}) = \begin{pmatrix}
+E & F \\
+F & G
+\end{pmatrix} \text{ and }
+(b_{ij}) = \begin{pmatrix}
+L & M \\
+M & N
+\end{pmatrix}\]. Due to the fact that the characteristic polynomial of a martrix is invariant under change of basis, the product of the two eigenvalue of $S_p$ will be exactly $\det(g_{ij})^{-1}(b_{ij}) = \det G^{-1}Q$ (note that whenever no confusion shall occur in the contex we will denote $G = (g_{ij}), Q = (b_{ij})$).
+
+\begin{theorem}
+	(Euler's theorem) Pick $p \in S$. For any normal section passing through $p$ with the tangent vector at $p$ being $\vkt{v}$, the curvature of such normal section is given by \[ \kappa_{v} = \kappa_{1}\cos^2\theta + \kappa_2\sin^2\theta,\] where $\kappa_1$ and $\kappa_2$ are the principal curvatures of the surface at point $p$ and $\theta$ is the angle between $\vkt{v}$ and one of the principal direction.
+\end{theorem}
+
+\begin{proof}
+	Choose $\vkt{e}_{1}$ and $\vkt{e}_2$ be unit eigenvectors of the self-adjoint mapping $S_p = -dN_p$, and $\kappa_1, \kappa_2$ be there corresponding eigenvectors. Observe \[\inner{S_p(\vkt{e}_i)}{\vkt{e}_i} = \kappa_i.\] Thus, for unit tangent vector of the normal section $\vkt{v} = \cos\theta \vkt{e_1} + \sin\theta \vkt{e_2} $ we have $\vkt{II}_{p}(\vkt{v}, \vkt{v}) = \kappa_{v} = \kappa_1\cos^2\theta + \kappa_2\sin^2\theta$.
+\end{proof}
+
+\begin{definition}
+	The Gaussian curvature $K$ and the mean curvature $H$ are given by the determinant and trace of $S_p$, respectively. That is to say,
+	\begin{align}
+		K &= \frac{\det Q}{\det G} = \frac{LN - M^2}{EF - G^2}\\
+		H &= \frac{GL - 2FM + EN}{EG - F^2}\\
+	\end{align}
+\end{definition}
+
+
+
+
+
+
+

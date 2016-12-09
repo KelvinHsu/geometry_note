@@ -1,0 +1,51 @@
+\section{Metrics on Sphere and Pseudo-Sphere}
+We will list some important metrics of the two-dimensional sphere ($S^2$) and pseudo-sphere ($L^2$). Details of some metrics on which notions of complex analysis are applied will be left for the next section.
+
+\subsection{Sphere}
+\begin{itemize}
+	\item (Change of co-ordinate)
+	$(x, y, z) = (x(\rho, \theta, \phi), y(\rho, \theta, \phi), z(\rho, \theta, \phi)), \rho > 0, 0\leq \theta \leq \pi, 0 \leq \phi \leq 2\pi$
+	\begin{align}
+	x &= \rho \sin\theta \cos\phi \\
+	y &= \rho \sin\theta \sin\phi \\
+	z &= \rho \cos\theta
+	\end{align}
+	With $x^2 + y^2 + z^2 = R^2, \rho, R>0 \iff \rho = R $, the spherical surface can be written as $\vr(\theta, \phi) = (x( R, \theta, \phi), y(R, \theta, \phi), z(R, \theta, \phi))$
+	
+	\item (Remainian metric)  Denote $A = (\pardiff{x^i}{z^j})$ be the Jacobian matrix of this change of coordinate. Then \[G = (g_{ij}) = A^tIA = \begin{pmatrix}
+		1 &     & \\
+		  & \rho^2 & \\
+		  &     & \rho^2\sin^2\theta 
+	\end{pmatrix}.\] Therefore, the first fundamental form of spherical surface: 
+	\begin{equation}
+	dl^2 = dr^2 + R^2(d\theta + \sin^2\theta d\phi^2).
+	\end{equation}
+	
+	\item (Stereographical projection)
+	Let $(\theta, \phi) = (\theta(r), \theta)$, where $r = R \cot(\theta/2)$. After some calculation we get \begin{equation}
+	dl^2 = \frac{4R^4}{(R^2 + r^2)^2} (dr^2 + r^2d\theta^2)
+	\end{equation}
+	Returning to the familiar Euclidean place we can instean write
+	\begin{equation}
+	dl^2 = \frac{4R^4}{(R^2 + x^2 + y^2)^2} (dx^2 + dy^2)
+	\end{equation}
+	, with $r^2 = x^2 + y^2.$ We can derive an even compacter form by resorting to the language of complex number, \begin{equation}
+	dl^2 = \frac{R^2 dz d\bar{z}}{(R^2 + z\bar{z})^2}
+	\end{equation}
+	
+\end{itemize}
+
+\subsection{Psuedo-sphere}
+\begin{itemize}
+	\item (Change of co-ordinate)
+	In $\R^3_1$, the usual metric is defined as $dl^2 = dt^2 - dx^2 - dy^2$. By undergoing the change of coordinate $(t, x, y) = (t(\rho, \chi, \phi), x(\rho, \chi, \phi), y(\rho, \chi, \phi)), \rho > 0, \chi \geq 0, 0 \leq \phi \leq 2\pi,$ such that
+	\begin{align}
+	t &= \rho \cos\chi \\
+	x &= \rho \sin\chi \cos\phi \\
+	y &= \rho \sin\chi \sin\phi.
+	\end{align}
+	Hence, the first fundamental form $dl^2 = d\rho^2 - \rho^2(d\chi^2 + \sinh^2\chi d\phi^2)$. Setting $\rho = R$ to get
+	\begin{equation}
+		dl^2 = - R^2(d\chi^2 + \sinh^2\chi d\phi^2)
+	\end{equation}
+\end{itemize}

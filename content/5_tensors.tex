@@ -1,0 +1,64 @@
+\section{Tensors: Algebraic Theory}
+So far we have dealt with many quantities consisting of mulitiple components, eg. vectors and funcamental forms. Due to this fact, more and more sets of indices are employed to help counter our problems. Therefore comes the need for a systematic approach which enable us to find an universal relation between these "multiple-components-quantities", which is the so-called tensors.
+
+First of all we have to ask ourself the problem, what exactly is a vector? The most common vectors which we have encountered are the tangent vectors and the gradient of a function. From these two examples we aim to develope a general, abstract definition of vectors. Now we give a basic inspection of these two types of vector under a change of coordinate $x^{i} = x^{i}(z^{j})$.
+
+\begin{align}
+\vkt{v} &= \xi^{i}e_i = \diff{x^i}{t} e_{i}= \pardiff{x^i}{z^j} \diff{z^j}{t} e_i = \tilde{\xi}^j \pardiff{x^i}{j} e_i \\
+\nabla f &= \eta_i e^i = \pardiff{f}{x^i}e^i = \pardiff{f}{z^j} \pardiff{z^j}{x^i} e^i = \tilde{\eta}_{j} \pardiff{z^j}{x^i} e^i
+\end{align}
+
+Notice that Einstein's convention is always assumed. Here, we have equivalent choices that we can summarize the two equations in either a "coefficient" point of view or a "basis" one. That is,
+
+\begin{align}
+	\xi^i &= \tilde{\xi}^j \pardiff{x^i}{z^j} \label{eq:vector_change_coef}\\
+	\eta_i&= \tilde{\eta}_j \pardiff{z^j}{x^i} \label{eq:covector_change_coef}
+\end{align}
+or
+\begin{align}
+	\tilde{e}_j &= \pardiff{x^i}{z^j} e_i \label{eq:vector_change_basis}\\
+	\tilde{e}^j &= \pardiff{z^j}{x^i} e^i \label{eq:covector_change_basis}
+\end{align}
+
+Now we have observed that these two kinds of vectors subject to different rules under change of coordinate. We now define them formally:
+
+\begin{definition}
+	If a tuple quantity in $\R^n$ subjects to the rule \eq{vector_change_coef} and \eq{vector_change_basis} under the change of coordinate $x^i = x^i(z^j)$, then one will call it a \textbf{vector}, while if it subjects to the rule \eq{covector_change_coef} and \eq{covector_change_basis}, then it is a \textbf{covector}.
+\end{definition}
+
+It is natural to ask further: what if we mix up the two different types of vectors? Hence, the concept of tensors arise.
+
+\begin{definition}
+	(Tensor) A type $(p, q)$ \textbf{tensor} on vector space $V, \dim(V) = n$, is a family of functions of points in $V$, $T^{i_1, \dots, i_p}_{j_1, \dots, j_q}(\vkt{x})$, which subjects to the transformation rule
+	\begin{equation}
+		T^{i_1, \dots, i_p}_{j_1, \dots, j_q}(\vkt{x}) = \tilde{T}^{k_1, \dots, k_p}_{l_1, \dots, l_q}(\vkt{z}) \pardiff{x^{i_1}}{z^{k_1}} \dots \pardiff{x^{i_p}}{z^{k_p}} \pardiff{z^{l_1}}{x^{j_1}} \dots \pardiff{z^{l_q}}{x^{j_q}}
+		\label{eq:tensor_change_coef}
+	\end{equation}
+	under the change of coordinate $x^i = x^i(z^j)$, where the summation with respect to indices $(k), (l)$ all range from $1$ to $n$, and $T^{(i)}_{(j)}, \tilde{T}^{(k)}_{(l)}$ are tensor representation in the old and new coordinate system, respectively.
+
+		In the "basis" point of view, one can also write
+	\begin{eqnarray}
+		T = T^{i_1, \dots, i_p}_{j_1, \dots, j_q} e_{i_1} \otimes \dots \otimes e_{i_p} \otimes e^{j_1} \otimes \dots \otimes e^{j_q},
+	\end{eqnarray}
+	which stick to the rule under change of coordinate
+	\begin{multline}
+		\tilde{T} = \tilde{T}^{k_1, \dots, k_p}_{l_1, \dots, l_q} \tilde{e}_{k_1} \otimes \dots \otimes \tilde{e}_{k_p} \otimes \tilde{e}^{l_1} \otimes \dots \otimes \tilde{e}^{l_q}\\
+		= \tilde{T}^{k_1, \dots, k_p}_{l_1, \dots, l_q} \para{\pardiff{x^{i_1}}{z^{k_1}}e_{i_1}} \otimes \dots \otimes \para{\pardiff{x^{i_p}}{z^{k_p}}e_{i_p}} \otimes \para{\pardiff{z^{l_1}}{x^{j_1}}e^{j_1}} \otimes \dots \otimes \para{\pardiff{z^{l_q}}{x^{j_q}}e^{j_q}}.
+		\label{eq:tensor_change_basis}
+	\end{multline}
+	One should realize that \eq{tensor_change_coef} coreponds to \eq{vector_change_coef} and \eq{covector_change_coef}, whereas \eq{tensor_change_basis} to \eq{vector_change_basis} and \eq{covector_change_basis}.
+\end{definition}
+
+\begin{remark}
+	$\{ e_{i_1} \otimes \dots \otimes e_{i_p} \otimes e^{j_1} \otimes \dots \otimes e^{j_q}: (i), (j) \in {1, 2, \dots, n} \}$ is just a basis under the discussed coordinate system. One can merely regard the tensor product $\otimes$ as an operation satisfies $\lambda \vkt{v} \otimes \vkt{w} = \lambda (\vkt{v} \otimes \vkt{w}) = \vkt{v} \otimes \lambda\vkt{w}$ for all scalar $\lambda$ and $\vkt{v}, \vkt{w} \in V$.
+\end{remark}
+
+We add an important comment: what is the difference between $e^i$ and $e_i$? Consider the total differential of a function $f$, $df = (\partial f/ \partial x^i) dx^i = (\partial f/ \partial z^j)(\partial z^j/ \partial x^i) dx^i$, we discover immediately that in this case $df$ is a covector and $dx^i$ performs exactly like $e^i$. Moreover, we can consider the differential map $df(\vkt{v})$, which is a linear transformation on $\vkt{v}$ and at the same time the directional derivative along $\vkt{v}$, and the duality will thus be revealed in front of our eyes:
+\[ df(\vkt{v}) = df\para{v^i e_i} = \pardiff{f}{x^i} v^i = \inner{\vkt{v}}{e^i\pardiff{}{x^i}}f= \vkt{v}(f), \]
+where $\vkt{v}$ turns into an operator $\sum_i v^i \partial/\partial x^i$. Note that $e^i(e_j) = dx^i(e_j) = e_j(x^i) = \partial x^i/ \partial x^j$
+
+\begin{example}
+	\begin{enumerate}
+		\item Type $(0, 2)$: 
+	\end{enumerate}
+\end{example}

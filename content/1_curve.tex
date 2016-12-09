@@ -1,0 +1,139 @@
+\section{Theory of Curves}
+Assume that $\mathbf{r}(t): \R \rightarrow \R^2$ is an 1-regular curve, i.e. $\vkt{r}'(t) \neq 0$. Define $v(t) := \vkt{r}(t)$ and that $\vkt{t}(t) := \frac{\vkt{r}'}{|\vkt{r}'|}$. Note that $|\vkt{v}| = 1 \iff t = l$, where $l$ is the natural parameter, or arc length. Whenever it is possible, we shall assume the natural parameter is used.
+
+\subsection{Introduction}
+\begin{fact}
+	(Leibniz's rule) \[ \diff{ \inner{\vkt{v}}{\vkt{w}}}{t} = \inner{\vkt{v'}}{\vkt{w}} + \inner{\vkt{v}}{\vkt{w'}}\] Therefore, one has $|\vkt{v}| = \text{const.} \iff \inner{\vkt{\vkt{v}'}}{\vkt{v}} = 0$.
+\end{fact}
+
+Observe that $|\vkt{t}| = 1 \implies \vkt{t}' \perp \vkt{t}$. This prompts us to define $\vkt{t}' = \kappa \vkt{n}$, where the $\vkt{n}$ is chosen to be such that $\kappa \geq 0$ and $\{\vkt{t}, \vkt{n}\}$ forms a basis in $\R^3$. Now we are endowed with the Serret-Frenet frame \[ \frac{d}{dl}
+\begin{pmatrix}
+ \vkt{v} \\
+ \vkt{n}
+\end{pmatrix}
+=
+\begin{pmatrix}{}
+0 & \kappa \\
+-\kappa & 0
+\end{pmatrix}
+\begin{pmatrix}
+\vkt{v} \\
+\vkt{n}
+\end{pmatrix}
+\]
+
+\begin{fact}
+	$A(t) \in O(n), A(0) = I \implies A'(0)^{T} = -A'(0)$ (skew-symetric).
+\end{fact}
+\begin{proof}
+	$A^{T}A = I \implies [A'^{T}(t)A(t) + A^T(t) A'(t)]_{t = 0} = 0$.
+\end{proof}
+
+\begin{theorem}
+	A curve is determined by its curvature function $\kappa(l)$ up to an Euclidean transformation.
+\end{theorem}
+\begin{proof}
+	Provided that $\vkt{t}$ has unit length under the parametrization of arc length $l$, we can assume $\vkt{t} = (\cos\theta(l), \sin\theta(l))$. So, \[\vkt{t}' = \diff{\theta}{l}(-\sin\theta(l), \cos\theta(l)) = \kappa \vkt{n}.\] We can conclude $\kappa(l) = \diff{\theta(l)}{l}$ (this is similar to the Gauss map, which will be introduced later). Once the $\kappa$ function is given, we can calculate by merely intergration to get $\vkt{r}(l)$, but left with some choices of the integration constants (therefore "up to an Euclidean transformation").
+\end{proof}
+
+\subsection{Global theory}
+\begin{definition}
+	(Degree of an unit tangent vector) \[\deg \vkt{t} := \frac{1}{2\pi} \int_{0}^{L} \kappa dl\]
+\end{definition}
+
+For a simple closed curve $C$, we have following facts,
+\begin{itemize}
+	\item $deg = \pm 1$
+	\item isoperimetric inequality: $4\pi A \leq L^2$. 
+\end{itemize}
+
+%%% To be inserted.
+\import{thm/}{isoperimetric}
+
+\subsection{Space curve} Given a 2-regular curve $\vkt{r}(l): I \rightarrow \R^3$, one can easily generalize the Serret-Frenet frame.
+\begin{definition}
+	$\vkt{b} := [\vkt{t}, \vkt{n}] = \vkt{t} \times \vkt{n}$. Here $\vkt{n}$ is called the principal normal of the curve and $\vkt{b}$ the binormal.
+\end{definition}
+
+\begin{theorem}
+	(Serret-Frenet frame)
+	\begin{equation}
+	\begin{pmatrix}
+	\vkt{t} \\
+	\vkt{n} \\
+	\vkt{b}
+	\end{pmatrix}'
+	=
+	\begin{pmatrix}
+	0       & \kappa & 0     \\
+	-\kappa &    0   & -\tau \\
+	0       &  \tau  & 0     \\
+	\end{pmatrix}
+	\begin{pmatrix}
+	\vkt{t} \\
+	\vkt{n} \\
+	\vkt{b}
+	\end{pmatrix},
+	\label{eq:frenet}
+	\end{equation}
+	where $\tau := -\inner{ \vkt{b} }{ \vkt{n}' }$ and $\kappa := |d\vkt{t}/dl|$.
+\end{theorem}
+
+\begin{proof}
+	Since $\vkt{b}$ by definition has constant unit length, we thus have $\vkt{b} \perp \vkt{b}'$. Therefore, $\vkt{b}' = a\vkt{t} + b\vkt{n}$ for some scalar $a, b$. $\{\vkt{t}, \vkt{n}, \vkt{b} \}$ forms an orthonormal basis, so we are able to calculate these coefficients by the following
+	\begin{align*}
+	a &= \inner{\vkt{b}'}{\vkt{t}} = \inner{\vkt{b}}{\vkt{t}}' - \inner{\vkt{b}}{\vkt{t}'} = -\inner{\vkt{b}}{\vkt{t}'} = \vkt{0}\\
+	b &= \inner{\vkt{b}'}{\vkt{n}} = \inner{\vkt{b}}{\vkt{n}}' - \inner{\vkt{b}}{\vkt{n}'} = -\inner{\vkt{b}}{\vkt{n}'}
+	\end{align*}
+	
+	Similarly, we have $\vkt{n}' = c\vkt{t} + d\vkt{b}$, whence $c = \inner{\vkt{n}'}{\vkt{t}} = -\inner{\vkt{n}}{\vkt{t}'} = -\kappa$ and $d = \inner{\vkt{n}'}{\vkt{b}} = -\tau$. To conclude, we get the following system
+	\begin{align*}
+	\vkt{t}' &= \kappa \vkt{n}\\
+	\vkt{n}' &= -\kappa \vkt{t} - \tau \vkt{b}\\
+	\vkt{b}' &= \tau \vkt{n}
+	\end{align*}
+\end{proof}
+
+\begin{theorem}
+	(The Fundamental Theorem of Space Curve) Given $n-1$ functions $k_1, \dots, k_{n-1} \in C^{\infty}([a, b], \R)$, there exists an unique curve $r:[a, b] \rightarrow \R^n$ (up to translations and rotations) such that its Frenet frame satisfies
+	\begin{equation}
+	\diff{ }{l}
+	\begin{pmatrix}
+	\vkt{t}_1 \\
+	\vdots \\
+	\vkt{t}_n
+	\end{pmatrix}
+	= A\vkt{T}
+	=
+	\begin{pmatrix}
+	0       &  k_1	&   0    & \cdots & 0	\\
+	-k_1    &   0	& 	k_2  &		  & 0	\\
+	0       & -k_2	& 	0	 & \ddots &  	\\
+	\vdots  &		& \ddots & \ddots & k_{n-1}   \\
+	0		&\cdots	&	0	 & k_{n-1}& 0
+	\end{pmatrix}
+	\begin{pmatrix}
+	\vkt{t}_1 \\
+	\vdots \\
+	\vkt{t}_{n}
+	\end{pmatrix},
+	\label{eq:frenet_n}
+	\end{equation}
+	
+	\begin{proof}
+		Note that \eq{frenet_n} is a linear ODE on $\R^{n^2}$. Provided $\vkt{T}(0) = (\vkt{t}_1(0), \dots, \vkt{t}_n(0))^{T} \in \text{SO}(n)$ as our initial condition, there must exist an unique solution $\vkt{T}(l):[a, b] \rightarrow \R^{n}$. We claim that $\vkt{T}(l) \in \text{SO}(n)$ for all $l \in [a, b]$. Let $V := \vkt{T}\vkt{T}^{t}$. We shall seek to show that $V = I_n$. Observe
+		\begin{align*}
+			V'  &= \vkt{T}'\vkt{T}^t + \vkt{T}\vkt{T}'^t \\
+				&= A\vkt{T}\vkt{T}^t + \vkt{T}(A\vkt{T})^t
+		\end{align*}
+		\begin{equation}
+			\implies V' = AV + VA^t = AV - VA = [A, V]
+			\label{eq:ode_frenet}
+		\end{equation}
+		
+		By the uniqueness of solution in an initial value problem, the one possible solution, namely $V(l) = I_n,~\forall l \in [a, b]$, of linear ODE \eq{ode_frenet} turns out to be the only one. Therefore, we have proven that $\vkt{T}$ forms an orthonormal basis at any moment. In other words, the curve will be uniquely determined if the initial $\vkt{T}$ is given. This completes the proof.
+	\end{proof}
+	
+	\subsection{Special relativity}
+	
+\end{theorem}

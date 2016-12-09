@@ -1,0 +1,52 @@
+%This is a sample LaTeX input file.  (Version of 11 April 1994.)
+%
+% A '%' character causes TeX to ignore all remaining text on the line,
+% and is used for comments like this one.
+
+\documentclass[12pt]{article}
+
+%%%%%%% Title %%%%%%%
+\title{\textbf{Notes on Differential Geometry}}  % Declares the document's title.
+\author{Kelvin Yueh-Sheng Hsu}      % Declares the author's name.
+\date{\today}      % Deleting this command produces today's date.
+
+%%%%%%% Packages %%%%%%%
+\usepackage[a4paper, margin=2 cm]{geometry}
+\usepackage{titling, amsmath, amssymb, amsthm, bm}
+\usepackage{import}
+
+%%%%%%% Lemma definition and lemma counter %%%%%%
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{corollary}{Corollary}[theorem]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{fact}[theorem]{Fact}
+\newtheorem*{remark}{Remark}
+\newtheorem{example}[theorem]{Example}
+
+%%%%%%% Custom commands %%%%%%%
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\vkt}[1]{\mathbf{#1}}
+\newcommand{\vr}{\vkt{r}}
+\newcommand{\diff}[3][]{\frac{d^{#1} #2}{d #3^{#1}}}
+\newcommand{\pardiff}[2]{\frac{ \partial #1}{ \partial #2 }}
+\newcommand{\inner}[2]{\left< #1, #2 \right>}
+\newcommand{\para}[1]{\left( #1 \right)}
+\newcommand{\bracket}[1]{\left[ #1 \right]}
+\newcommand{\eq}[1]{eq.(\ref{eq:#1})}
+
+%\allsectionsfont{\sffamily}
+\setlength{\droptitle}{-5em}
+
+\begin{document}             % End of preamble and beginning of text.
+\maketitle                   % Produces the title.
+
+\import{content/}{1_curve}
+\import{content/}{2_surface}
+\import{content/}{3_metrics_on_sphere}
+\import{content/}{4_complex}
+\import{content/}{5_tensors}
+\import{content/}{6_variational}
+
+
+\end{document}               % End of document.

@@ -1,0 +1,155 @@
+\newpage
+\section{Theory of Variational Calculus}
+\subsection{One-dimensional variational problems}
+\begin{definition}
+	Given a curve $\gamma:[a, b] \rightarrow \R^n$ with $\gamma(a) = P$ and $\gamma(b) = Q$, one can associate a number
+	\begin{eqnarray}
+		S[\gamma] = \int_{P}^{Q} L(x, \dot{x}) dt
+	\end{eqnarray}
+	to each function $L(x, \dot{x})$. Here the function $L(t, x, \xi): [a, b] \times U \times \R^n \rightarrow \R$, where $U$ is some neighborgood of $x$ and $\R^n$ is the tangent space, is said to be the Lagrangian. Also, $S[\gamma]$ is called the action functional.
+\end{definition}
+
+The main purpose of variational calculus is to find $\gamma$ which results in least $S[\gamma]$.
+
+\begin{theorem}
+	If action functional $S$ attains a minimum at $\gamma_0$ among all smooth curve from $P$ to $Q$, then the \textbf{variational derivative}
+	\begin{eqnarray}
+	\frac{\delta S}{\delta x^i} := \pardiff{L}{x^i} - \diff{ }{t}\left( \pardiff{L(t, x(t), \xi(t))}{\xi^i}  \right)_{\xi = \dot{x}(t)} = 0
+	\end{eqnarray}
+\end{theorem}
+
+\begin{proof}
+	For any function $\eta \in C^1([a, b], U)$ with $\eta(a) = \eta(b) = 0$, we have
+	\begin{eqnarray}
+	0 &&= \left.\diff{ }{\epsilon} S[\gamma_0 + \epsilon \eta] \right|_{\epsilon = 0}
+	\nonumber\\
+	&&= \int_{a}^{b} \left. \diff{}{\epsilon} L(t, x + \epsilon \eta, \dot{x} + \epsilon \dot{\eta}) \right|_{\epsilon = 0} dt
+	\nonumber\\
+	&&= \int_{a}^{b} \left[ \pardiff{L}{x^i}\eta^i(t) + \pardiff{L}{\xi^i} \dot{\eta}^i(t) \right]_{\epsilon = 0} dt
+	\nonumber\\
+	&&= \int_{a}^{b} \pardiff{L}{x^i}\eta^i(t)dt + \left. \pardiff{L}{\xi^i} \eta^i(t) \right|_a^b - \int_{a}^{b} \diff{ }{t} \left( \pardiff{L}{\xi^i} \right) \eta^i dt
+	\nonumber\\
+	&&= \int_{a}^{b} \frac{\delta S}{\delta x^i} \eta^i dt
+	\end{eqnarray}
+	Therefore, we can set $\eta^i = \dfrac{\delta S}{\delta x^i} f$, where $f$ is the cut-off function, i.e. $f \in C^{\infty}([a, b]), f(a) = f(b) = 0$ and $f>0$ on $(a, b)$. This enables us to conclude
+	\[ \int_{a}^{b} f \left( \frac{\delta S}{\delta x^i} \right)^2 dt = 0 \implies \frac{\delta S}{\delta x^i} = 0. \]
+\end{proof}
+
+\begin{definition}
+	The equation
+	\begin{eqnarray}
+	\pardiff{L}{x^i} - \diff{ }{t}\left( \pardiff{L}{\xi^i}(t, x, \dot{x})  \right) = 0
+	\label{eq:E-L}
+	\end{eqnarray}
+	is called the \textbf{Euler-Lagrange equation}.
+\end{definition}
+
+\begin{definition}
+	Write eq. (\ref{eq:E-L}) as \[\diff{ }{t}\left( \pardiff{L}{\xi^i} (t, x, \dot{x}) \right) = \pardiff{L}{x^i}, i = 1, \dots, n.\]	Define
+	\begin{eqnarray}
+		\text{(Momentum)} && p_i := \pardiff{L}{\xi^i}\\
+		\text{(Force)} && f_i := \pardiff{L}{x^i}.
+	\end{eqnarray}
+	Then the Euler-Lagrange equation turns out to be Newton's law, $f_i = dp_i/dt$. Moreover, the energy is defined as
+	\begin{eqnarray}
+		(Energy) && E := \xi^i \pardiff{L}{\xi^i} - L.
+	\end{eqnarray}
+\end{definition}
+
+\begin{example}
+	\begin{enumerate}
+		\item Let $L = L(x, \xi) = (1/2)m |\xi|^2 - U(x)$. Then we have
+		\begin{eqnarray}
+		&&\vkt{f} = \nabla^{(x)}L = -\nabla U \\
+		&&\vkt{p} = \nabla^{(\xi)}L = m\xi = m\dot{x} \\
+		&&E = m|\dot{x}|^2 - L = \frac{1}{2}m|\dot{x}|^2 + U.
+		\end{eqnarray}
+		
+		\item Energy of the curve in a space with $dl^2 = g_{ij} dx^i dx^j$. $L$ is given by $L = (1/2)|\xi|^2 = (1/2)g_{ij} \xi^i \xi^j$. From this, momentum, force and energy can be calculated,
+		\begin{eqnarray}
+			&&p_k = g_{kj}\xi^j
+			\nonumber\\
+			&&f_k = \frac{1}{2}(\partial_k g_{ij}) \xi^i \xi^j
+			\nonumber\\
+			&&E   = L.
+			\nonumber
+		\end{eqnarray}
+		Substituting them into Euler-Lagrange equation and then raising the index $k$ by $g_{km}$, we will see that
+		\begin{eqnarray}
+		&& g^{km} \left( dp_k/dt - f_k \right)
+		\nonumber\\
+		&&= \ddot{x}^m + g^{km} \left( \partial_i g_{jk} - \frac{1}{2} \partial_k g_{ij} \right) \dot{x}^i \dot{x}^j = 0
+		\label{eq:geodesic_var}
+		\end{eqnarray}
+		Note that the term $g^{km} \left( \partial_i g_{jk} - (1/2) \partial_k g_{ij} \right)$ is symmetric in $i, j$, whence if we exchange the index and add it to the original one and then divide it by $2$, we will end up with the Christoffel symbol. That is, eq. (\ref{eq:geodesic_var}) is in fact, \[ \ddot{x}^m + \Gamma^m_{ij} \dot{x}^i \dot{x}^j = 0, \] the geodesic equation. Moreover, we can see that the geodesic curve is automatically parametrized by $t = \mu l$, where $\mu$ is some constant and $l$ is arclength.
+		
+		\item Length of a curve. Let $L = |\xi| = \sqrt{g_{ij}\xi^i \xi^j}$. In this case, the Euler-Lagrange equation will be
+		\[ \diff{ }{t} \left( \frac{g_{kj} \xi^j}{\sqrt{g_{ij}\xi^i \xi^j}} \right) = \frac{ (\partial_k g_{ij}) \xi^i \xi^j}{2\sqrt{g_{ij}\xi^i \xi^j}}. \] If we choose the parameter of the curve to be multiple of arclength, then this equation will be reduced to the situation in the previous case.
+	\end{enumerate}
+\end{example}
+
+\subsection{Conservation law}
+If we compute the quantity $dE/dt$, we will find out that
+\begin{eqnarray}
+\diff{E}{t} &&= \diff{ }{t} \left( \dot{x}^i \pardiff{L}{\dot{x}^i} - L\right)
+\nonumber\\
+&&= \ddot{x}^i \pardiff{L}{\dot{x}^i} + \dot{x}^i \diff{ }{t}\pardiff{L}{\dot{x}^i} - \pardiff{L}{t} - \pardiff{L}{x^i}\dot{x}^i - \pardiff{L}{\dot{x}^i} \ddot{x}^i
+\nonumber\\
+&&= -\pardiff{L}{t}.
+\nonumber
+\end{eqnarray}
+That is to say, the energy $E$ preserves if and only if $L$ is independent of $t$.
+
+To further investigate this phenomenon, we consider the general case. Suppose there is an one-parameter group of transformations at $p \in U$, i.e. a group of transformations that consists of $S_{\tau}: U_p \subset U \rightarrow \R^n$ which are $C^{\infty}$-functions and have the properties: $S_0 = e, S_{\tau_1 + \tau_2} = S_{\tau_1} \circ S_{\tau_2}$ and $S_{-\tau} = S_{\tau}^{-1}$. We can associate the one-parameter group with the vecter field $\vkt{X}(p) = \diff{ }{\tau}\left. S_{\tau}(p) \right|_{\tau = 0}$.
+
+\begin{definition}
+	The one-parameter group $\{S_{\tau}\}$ of transformation preserves $L(x, \xi)$ if
+	\begin{eqnarray}
+		\diff{ }{\tau} S_{\tau} L(x, \xi) = \diff{ }{\tau}L(S_{\tau}(x), S_{\tau *}(\xi)) = 0, \forall \xi.
+		\label{cond:preserve_L}
+	\end{eqnarray}
+\end{definition}
+
+\begin{theorem}
+	(E. Noether) If $L$ is preserved by $S_{\tau}$ generated by $\vkt{X}$, then on any extremal of $L$ (i.e. the curve extremize $S[\gamma]$) \textbf{the momentum in the $\vkt{X}$ direction} is conserved, i.e. the quantity $X^ip_i$ is a constant.
+\end{theorem}
+\begin{proof}
+	Let $x \in \R^n$ be such that $\vkt{X}(x) \neq 0$. We can find a neighborhood of $x$ in which there exists a coordinate $y^1, \dots, y^n$ such that $S_{\tau}(y^1, \dots, y^n) = (y_1 + \tau, y^2, \dots, y^n)$. Since by the hypothese $S_{\tau}$ preserves $L$, it follows that change in $y^1$ doesn't effect the value of $L$, i.e. \[ \pardiff{L(y, \dot{y})}{y^1} \equiv 0. \] From Euler-Lagrange equation, we can observe \[ \diff{ }{t} \left( \pardiff{L}{\dot{y}^1} \right) = \pardiff{L(y, \dot{y})}{y^1} \equiv 0. \] But note that the term $\partial L/ \partial \dot{y}^1$ is in fact, with respect to the original coordinate $(x^1, \dots, x^n)$, $X^i(\partial L/ \partial x^i)$. This gives the wanted conclusion.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%% Exercises %%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Homework 11}
+\begin{enumerate}
+	\item (Ex. in pp. 324) Let
+	\begin{eqnarray}
+	L &&= L(t, x, \dot{x}, \ddot{x}, \dots, x^{(k)});
+	\nonumber\\
+	S[\gamma] &&= \int_{\gamma} L(t, x, \dot{x}, \ddot{x}, \dots, x^{(k)}) dt.
+	\end{eqnarray}
+	Prove that the extremals of the functional $S[\gamma]$ satisfy the Euler-Lagrange equation
+	\begin{eqnarray}
+		\frac{\delta S}{\delta x^i} := \pardiff{L}{x^i} - \diff{}{t}\pardiff{L}{\dot{x}} + \diff[2]{ }{t} \pardiff{L}{\ddot{x}} - \cdots + (-1)^k \diff[k]{ }{t} \pardiff{L}{x^{(k)}} = 0.
+	\end{eqnarray}
+	
+	\item (Claim in pp. 335) For $L = (1/2)mv^2 - U(r)$ and $U(r) = \alpha/r$ or $U(r) = \alpha r^2$, there exists a region of 6-dimensional space coordinatized by $x, \dot{x}$, which is completely filled by closed orbits (i.e. for every $(x_0, \xi_0)$ in the region there is a closed orbit $x = x(t)$ such that for some $t_0$ we have $x_0 = x(t_0), \xi_0 = \dot{x}(t_0)$). These regions are given by
+	\begin{eqnarray}
+		E < 0, && \text{ for } U = \frac{\alpha}{r}, \alpha < 0
+		\nonumber\\
+		E \geq 0 && \text{ for } U = \alpha r^2, \alpha > 0.
+		\nonumber 
+	\end{eqnarray}
+	
+	\item (Ex. 33.4:1) Consider the differential equation \[ \dot{u} = \pardiff{ }{x} \frac{\delta S}{\delta u}, \] on the space of functions $u(x)$ periodic with period $T$, and satisfying \[ \int_{x_0}^{x_0+T} u(x) dx = 0, \] where $S = S[u]$ is a functional of the form \[ S[u] = \int_{x_0}^{x_0+T} L(u, u', \dots) dx. \] Transform the differential equation into standard Hamiltonian form. (Hint: Work with the Fourier coefficients $u_n$ of $u$ determined by $u = \sum_{n = -\infty}^{\infty} u_n e^{(2 \pi i n x)/T} $.)
+	
+	\item (Ex. 25.3:3) For each vector field $X$ define a linear operator $i(X)$ on forms by
+	\[ [i(X)\omega](X_1, \dots, X_{k-1}) = \omega(X, X_1, \dots, X_{k_1}), \] where $\omega$ is any form of rank $k$, and $X_1, \dots, X_{k-1}$ are arbitrary vector fields.
+	\begin{enumerate}
+		\item Prove that $i(X)$ is \emph{anti-differentiation}, i.e.
+		\[ i(X)(\omega_1 \wedge \omega_2) = (i(X)\omega) \wedge \omega + (-1)^k \omega_1 \wedge (i(X)\omega_2), \]
+		where $k$ is the rank of the form $\omega_1$.
+		\item Establish the formula \[ i(X)d + d i(X) = L_X, \] where $L_X$ denotes the operation of taking the Lie derivative along the field $X$.
+	\end{enumerate}
+\end{enumerate}
+
