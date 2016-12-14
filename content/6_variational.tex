@@ -227,21 +227,83 @@ To further investigate this phenomenon, we consider the general case. Suppose th
 		\frac{\delta S}{\delta x^i} := \pardiff{L}{x^i} - \diff{}{t}\pardiff{L}{\dot{x}} + \diff[2]{ }{t} \pardiff{L}{\ddot{x}} - \cdots + (-1)^k \diff[k]{ }{t} \pardiff{L}{x^{(k)}} = 0.
 	\end{eqnarray}
 	
+	\begin{proof}
+		Let $C$ be the set of curves satisfying the boundary condition $x^i(a)$, $x^i(b)$, $\dots$, $[x^{k-1}]^i(a)$, $[x^{k-1}]^i(b)$, $i = 1, \dots, n$. Suppose $\gamma_0$ extremizes $S[\gamma]$ over $C$. Let $\eta: y^i(t), a \leq t \leq b,$ be an arbitrary curve with $y^i(a) = 0 = y^i(b), \dots, [y^{k-1}]^i(a) = 0 = [y^{k-1}]^i(b)$, so that we have \[ \left. \diff{ }{t} S[\gamma_0 + \epsilon \eta] \right|_{\epsilon = 0}  = 0.\] Therefore,
+		\begin{eqnarray}
+			0 = \int_{a}^{b} \pardiff{L}{x^i} y^i + \pardiff{L}{\dot{x}^i} \dot{y}^i + \dots + \pardiff{L}{x^{(k), i}} y^{(k), i} dt,
+			\label{eq:extrema_cond}
+		\end{eqnarray}
+		where the summation over $i$ is understood to take place, and $x^{(j), i}$ denotes the $i$-th component of $j$-th derivative of $x$. Note that
+		\[ \int \pardiff{L}{x^{(j), i}} y^{(j), i} = (-1)^{j} \int_{a}^{b} y^i \diff[j]{ }{t} \pardiff{L}{x^{(j), i}}.\]
+		Finally from Eq. (\ref{eq:extrema_cond}), we have
+		\begin{eqnarray}
+			\int_{a}^{b} y^i \left( \pardiff{L}{x^i} + \sum_{j = 1}^{k} (-1)^{j} \int_{a}^{b} y^i \diff[j]{ }{t} \pardiff{L}{x^{(j), i}} \right) = 0.
+		\end{eqnarray}
+		
+		Set $\eta: y^i = f(t) \psi_i$, where $f$ is a cutoff function (i.e. $f(a) = 0 = f(b)$ and $f > 0$ on $(a, b)$) and $\psi_i = \pardiff{L}{x^i} + \sum_{j = 1}^{k} (-1)^{j} \int_{a}^{b} y^i \diff[j]{ }{t} \pardiff{L}{x^{(j), i}}$. Then the result follows from $\int_{a}^{b} f \psi_i^2 dt= 0$.
+	\end{proof}
+	
 	\item (Claim in pp. 335) For $L = (1/2)mv^2 - U(r)$ and $U(r) = \alpha/r$ or $U(r) = \alpha r^2$, there exists a region of 6-dimensional space coordinatized by $x, \dot{x}$, which is completely filled by closed orbits (i.e. for every $(x_0, \xi_0)$ in the region there is a closed orbit $x = x(t)$ such that for some $t_0$ we have $x_0 = x(t_0), \xi_0 = \dot{x}(t_0)$). These regions are given by
 	\begin{eqnarray}
 		E < 0, \alpha < 0&& \text{ for } U = \frac{\alpha}{r}
 		\nonumber\\
-		E \geq 0, \alpha > 0 && \text{ for } U = \alpha r^2.
+		E > 0, \alpha > 0 && \text{ for } U = \alpha r^2.
 		\nonumber 
 	\end{eqnarray}
+	\begin{proof}
+		From the hint in the text one can derive the integral
+		\begin{eqnarray}
+			\int d\phi = \int \frac{|M|dr}{ r^2 \sqrt{2m(E - U_{eff})} },
+		\end{eqnarray}
+		with $U_{eff} = U(r) + |M|^2/2mr^2$, to determine the equation of the trajectory.
+		\begin{enumerate}
+			\item For the case $U(r) = \alpha / r$, we can substitue the potential term into the integral and get
+			\begin{eqnarray}
+				d\phi = \frac{dr / r^2}{\sqrt{\frac{2mE}{|M|^2} - \frac{2m\alpha}{|M|^2r} - \frac{1}{r^2}}}。
+			\end{eqnarray}
+			Perform the change of variable $u = 1/r$ and set $A = 2mE/|M|^2, B = 2m\alpha/|M|^2$.
+			\begin{eqnarray}
+				d\phi = \frac{-du}{\sqrt{A - Bu -u^2}}.
+			\end{eqnarray}
+			Note that $-u^2 - Bu + A = -(u + B/2)^2 + A + B^2/4$. Let $v = 2u + b, dv = 2du$ and $k^2 = 4A+B^2$. Then,
+			\begin{eqnarray}
+				d\phi = \frac{-dv}{\sqrt{k^2 - v^2}}.
+			\end{eqnarray}
+			Integrate and get
+			\begin{eqnarray}
+				\phi = \arccos \left( \frac{v}{k} \right) + C,
+			\end{eqnarray}
+			for $-1 \leq v/k \leq 1$ and some constant $C$. If we give the boundary condition $\phi(v)|_{v = k} = \phi_0$, then we will have $C = \phi_0$. After some rearrangement and substitute back the constants, the equations turn out to be
+			\begin{eqnarray}
+				r(\phi) = \frac{-|M|^2/m\alpha}{1 - \sqrt{1 + 2E|M|^2 / m\alpha^2} cos(\phi - \phi_0)}.
+			\end{eqnarray}
+			This is of the form of a conic section in polar coordinate, $r = p/(1 - \epsilon \cos\phi)$. For $r(\phi )$ to be a closed orbit, or more precisely an ellipse, we shall request $p > 0$ and $\epsilon < 1$, which leads to the conclusion that closed orbits fill the region $E < 0, \alpha < 0$.
+			
+			\item For $U(r) = \alpha r^2$, by a similar deduction, we can reduce the problem to the integral
+			\begin{eqnarray}
+				d\phi = \frac{-u du}{\sqrt{-u^4 + Au^2 -B}},
+			\end{eqnarray}
+			with $A = 2mE/|M|^2, B = 2m\alpha/|M|^2$. After a series of change of variable and substitution back, we then have
+			\begin{eqnarray}
+				\phi = \frac{1}{2} \arccos\left(\frac{2u^2 - A}{\sqrt{A^2 - 4B}}\right) + C
+			\end{eqnarray}
+			Set the boundary condition $\phi = \phi_0$ when $u^2 = (\sqrt{A^2 - 4B} + A)/2$, which leads to $C = \phi_0$. Therefore,
+			\[ \phi - \phi_0 = \frac{1}{2} \arccos\left(\frac{2u^2/A - 1}{\sqrt{1 - 4B/A^2}}\right),\]
+			or
+			\begin{eqnarray}
+				r^2 = \frac{|M|^2/mE}{1 + \sqrt{1 - |M|^2\alpha/2mE^2} \cos 2(\phi - \phi_0)}.
+			\end{eqnarray}
+			This as well represents a conic section in polar coordinate.  By the condition for an ellipse we can draw the same conclusion but in the region $E > 0, \alpha > 0$.
+		\end{enumerate}
+	\end{proof}
 	
 	\item (Ex. 33.4:1) Consider the differential equation \[ \dot{u} = \pardiff{ }{x} \frac{\delta S}{\delta u}, \] on the space of functions $u(x)$ periodic with period $T$, and satisfying \[ \int_{x_0}^{x_0+T} u(x) dx = 0, \] where $S = S[u]$ is a functional of the form \[ S[u] = \int_{x_0}^{x_0+T} L(u, u', \dots) dx. \] Transform the differential equation into standard Hamiltonian form. (Hint: Work with the Fourier coefficients $u_n$ of $u$ determined by $u = \sum_{n = -\infty}^{\infty} u_n e^{(2 \pi i n x)/T} $.)
 	
 	\item (Ex. 25.3:3) For each vector field $X$ define a linear operator $\iota(X)$ on forms by
-	\[ [\iota(X)\omega](X_1, \dots, X_{k-1}) = \omega(X, X_1, \dots, X_{k_1}), \] where $\omega$ is any form of rank $k$, and $X_1, \dots, X_{k-1}$ are arbitrary vector fields.
+	\[ [\iota(X)\omega](X_1, \dots, X_{k-1}) = \omega(X, X_1, \dots, X_{k-1}), \] where $\omega$ is any form of rank $k$, and $X_1, \dots, X_{k-1}$ are arbitrary vector fields.
 	\begin{enumerate}
 		\item Prove that $\iota(X)$ is \emph{anti-differentiation}, i.e.
-		\[ \iota(X)(\omega_1 \wedge \omega_2) = (\iota(X)\omega) \wedge \omega + (-1)^k \omega_1 \wedge (\iota(X)\omega_2), \]
+		\[ \iota(X)(\omega_1 \wedge \omega_2) = (\iota(X)\omega_1) \wedge \omega_2 + (-1)^k \omega_1 \wedge (\iota(X)\omega_2), \]
 		where $k$ is the rank of the form $\omega_1$.
 		\item Establish the formula \[ \iota(X)d + d \iota(X) = L_X, \] where $L_X$ denotes the operation of taking the Lie derivative along the field $X$.
 	\end{enumerate}
