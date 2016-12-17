@@ -208,13 +208,266 @@ To further investigate this phenomenon, we consider the general case. Suppose th
 	\[ S_0 = \int p\dot{x} dt = \int p dx. \]
 \end{theorem}
 \begin{proof}
-	If the trajectory $(x(t), p(t))$ extremize $\int (p\dot{x} - H) dt$ over a class of curves with energy level $E$, then it certainly extremizes $\int (p\dot{x} - E) dt$ over a smaller class. However, $\int E dt$ is a constant, whence it also extremizes $S_0 = \int p\dot{x} dt$.
+	If the trajectory $(是p(t))$ extremize $\int (p\dot{x} - H) dt$ over a class of curves with energy level $E$, then it certainly extremizes $\int (p\dot{x} - E) dt$ over a smaller class. However, $\int E dt$ is a constant, whence it also extremizes $S_0 = \int p\dot{x} dt$.
 \end{proof}
 
 
+%%%%%% 12/14 %%%%%%%
+\subsection{Geometric theory of phase space ($T^*\R^n$)}
+Consider the gradient flow satisfying
+\[\dot{y} = \nabla F(y(t))\]
+with a given non-degenerate metric $g_{ij}$, which is not necessarily symmetric. Note that the gradient $\nabla$ is defined as \[ \nabla F := (dF)^\#, \] where $dF = F_i dy^i$ and thus $(dF)^\# = F^i \partial_{y^i}$, whence the gradient is written as $\nabla F = g^{ij} (\partial F/ \partial y^j) \partial_{y^i}$.
+
+\begin{remark}
+	The metric used to raise an index must be placed in front of the tensor whose index is being raised to avoid confusions.
+\end{remark}
+
+\begin{lemma}
+	For any function $h(y)$, \[ \dot{h} := \diff{h(y(t))}{t} \equiv \inner{\nabla F}{\nabla h}, \] along the integral curve $y(t)$ of $\nabla F(y)$.
+\end{lemma}
+\begin{proof}
+	\begin{eqnarray}
+		\dot{h} &&= \diff{ }{t} h(y(t))
+		\nonumber\\
+		&&= dh(\dot{y}) = dh(\nabla F)
+		\nonumber\\
+		&&= \pardiff{h}{y^i} g^{ij} \pardiff{F}{y^i}
+		\nonumber\\
+		&&= \inner{dh}{dF} = \inner{\nabla h}{\nabla F}
+		\nonumber
+	\end{eqnarray}
+	or
+	\begin{eqnarray}
+		&&\pardiff{h}{y^i} g^{ij} \pardiff{F}{y^i}
+		\nonumber\\
+		&&= h_i g^{ij} F_j
+		\nonumber\\
+		&&= h_i F^i
+		\nonumber\\
+		&&= g_{ij} h^j F^i = \inner{\nabla F}{\nabla h}.
+		\nonumber
+	\end{eqnarray}
+\end{proof}
+
+Now we set $m = 2n$ and let $g_{ij}$ be non-degenerate skew-symmetric, i.e. $g_{ij} = -g_{ij}, \det(g_{ij}) = g \neq 0$. Define the $2$-form
+\[ \Omega := \sum_{i<j} g_{ij} dy^i \wedge dy^j. \]
+
+\begin{lemma}
+	If $g>0$, then
+	\[\frac{1}{n!}\Omega^n = \sqrt{g} dy^1 \wedge \dots \wedge dy^{2n}.\]
+	In fact, $\sqrt{g}$ is a polynomial in $g_{ij}$, called the \textbf{Pfaffian}.
+\end{lemma}
+\begin{proof}
+	Fix $p \in \R^{2n} \simeq \mathrm{T}_{p}R^{2n}$. From \emph{the principal axis theorem for skew-symmetric axis} in linear algebra, we have that, with respect to a coordinate system $(z_1, \dots, z_{2n}) = (x^1, p_1, \dots. x^n, p_n)$, $y = Az, A \in \mathrm{SO}(2n)$ and
+	\begin{eqnarray}
+		(\tilde{g}_{ij}(p)) = A^{t}(g_{ij}(p)) A = 
+		\begin{pmatrix}
+			D_1 &&     &&    	 &&    		&&		\\
+			    && D_2 &&        &&	   		&&		\\
+			    &&     && \ddots &&			&&		\\
+			    &&	   && 		 && D_{n-1} &&		\\
+			    &&     &&        && 		&&  D_n
+		\end{pmatrix},
+	\end{eqnarray}
+	where each $D_i, i = 1, \dots, n$ is of the form
+	\[ D_i =
+	\begin{pmatrix}
+				 0&&	\lambda_i\\
+		-\lambda_i&&			0\\
+	\end{pmatrix}.\]
+	Therefore, in this particular coordinate system, the differential $2$-form takes the form $\Omega = \sum_{i = 1}^{n} \lambda_i dx^i \wedge dp_i$. Finally,
+	\begin{eqnarray}
+		\Omega^n = \Omega \wedge \dots \wedge \Omega = n! \left(\prod_{i = 1}^{n} \lambda_i \right) dx^1 \wedge dp_1 \wedge \dots \wedge dx^n \wedge dp_n.
+	\end{eqnarray}
+	Note that $g = \lambda_1^2 \dots \lambda_n^2$. This lemma hence follows.
+\end{proof}
+
+\begin{definition}
+	$\R^{2n}$ with coordinate $(x^i, p_i)_{i = 1}^{n}$ such that $\Omega = \sum_i dx^i \wedge dp_i$ (i.e. $\lambda_i = 1$) is called an abstract phase space. This coordinate $(x^i, p_i)_{i = 1}^{n}$ is said to be canonical coordinate. In the phase space, the differential equation $\dot{y} = \nabla H(x^i, p_i)$ generating the gradient flow becomes Hamitonian equations. Namely, \[ \dot{y} = \nabla H(x^i, p_i) \iff \dot{x}^i = \pardiff{H}{p_i}, \dot{p}_i = -\pardiff{H}{x^i}.\]
+\end{definition}
+
+\begin{definition}
+	(The Poisson Bracket) \[\{ f, g \} := \inner{\nabla f}{\nabla g} \equiv g_{ij} f^i g^i = \sum_{i = 1}^{n} \left( \pardiff{f}{x^i} \pardiff{g}{p_i} - \pardiff{f}{p_i} \pardiff{g}{x^i} \right). \]
+	Note that we have assumed the condition for abstract phase space in the last equality.
+\end{definition}
+
+\begin{fact}
+	For the phase space, we have the following properties:
+	\begin{enumerate}
+		\item $\{ \cdot, \cdot\}$ is $\R$-linear and skew-symmetric.
+		\item The Poisson bracket statisfies Jacobi identity.
+		\item Leibniz's rule: $\{fg, h\} = f\{g, h\} + g\{ f, h\}$.
+		\item $\nabla \{f, g\} = - [\nabla f, \nabla g]$, where $[ \cdot, \cdot ]$ denotes the Lie bracket.
+	\end{enumerate}
+\end{fact}
+\begin{proof}
+	1. and 3. come directly from the definition. Moreover, since the mapping $f \mapsto \nabla f$ is a monomorphism from the set of smooth functions to vector fields and thus 4. implies 2., we need only prove 4., which can be verified by direct computation.
+\end{proof}
+
+Instead of going through tedious computations, we can give another proof that Poisson bracket forms Lie algebra by employing the following theorem:
+
+\begin{theorem}
+	(Darboux) Given a skew-symmetric metric $g_{ij}$, the set of smooth functions $f(x, p)$ with Poisson bracket ${ \cdot , \cdot}$ forms a Lie-algebra if and only if $d\Omega = 0$ (i.e. sympletic), if and only if locally an abstract phase space.
+	\label{thm:darboux}
+\end{theorem}
+\begin{proof}[Proof for the first iff.] The Jacobi identity holds if and only if
+	\begin{eqnarray}
+		&&\{ \{ f_1, f_2 \}, f_3 \} + \{ \{ f_2, f_3 \}, f_1 \} + \{ \{ f_3, f_1 \}, f_2 \} = 0
+		\nonumber\\
+		\iff && g^{pq} \partial_q g^{ij} \left(\partial_p f_1 \partial_i f_2 \partial_j f_3 + \partial_p f_2 \partial_i f_3 \partial_j f_1 + \partial_p f_3 \partial_i f_1 \partial_j f_2 \right) = 0
+		\nonumber\\
+		\iff && \partial_p f_1 \partial_i f_2 \partial_j f_3 \left( g^{pq} \partial_q g^{ij} + g^{iq} \partial_q g^{jp} + g^{jq} \partial_q g^{pi} \right) = 0
+		\nonumber
+	\end{eqnarray}
+	Multiply by $g_{rp}g_{sj}g_{ti}$ and sum over $p, i, j$.
+	\[ \iff (d\Omega)_{rst} = \partial_{r} g_{ts} - \partial_{s} g_{tr} + \partial_{t} g_{sr} = 0. \]
+\end{proof}
+
+\begin{lemma}
+	(Poincar\'{e}'s lemma) On a disk (or contractible open set) $D \subset \R^N$, $d\omega = 0, \omega \in \Lambda^{p} \implies \omega = d\eta$ for some $\eta \in \Lambda^{p-1}$
+	\label{lem:poincare}
+\end{lemma}
+\begin{proof}[Sketch of proof.]
+	This can be derived from Cartan's Homotopy formula (See Ex. \ref{thm:cartan_homo} of  \ref{sec:hw11}).
+	\begin{eqnarray}
+		&&L_{X} = \iota_X d + d \iota_X
+		\nonumber\\
+		\implies &&\diff{ }{t} \left(f^*_t \omega\right)  = L_X(\omega) = \iota_X d\omega + d\iota_x(\omega) = d\iota(\omega).
+		\nonumber\\
+		\implies && \int \diff{ }{t} \left(f^*_t \omega\right) = \int d \iota_X(\omega)
+	\end{eqnarray}
+\end{proof}
+
+\begin{proof}[Proof for second iff of Darboux's theorem.]
+	Here we use Moser's procedure, namely
+	\begin{lemma}
+		If $\omega_t$ is sympletic $d\omega_t = 0$ for $t \in [0, 1]$ and $\diff{ }{t}\omega_t = d\sigma_t$ for some $\sigma_t$ (i.e. )
+	\end{lemma}
+\end{proof}
+
+
+%%%%%% 12/16 %%%%%%
+\begin{remark}
+	In the text, the Poisson bracket is defined as 
+	\begin{eqnarray}
+		\inner{\nabla f}{\nabla g} := g^{ij} f_i g_j,
+	\end{eqnarray}
+	while the usual convention is
+	\begin{eqnarray}
+		\inner{\nabla f}{\nabla g} := g_{ij} f^i g^j.
+	\end{eqnarray}
+	Since $g_{ij}$ and $g^{ij}$ are inverse matrices to each other, this results in that, under the phase space, 
+	\[ \inner{\nabla f}{\nabla g} = - \sum_i \left( \pardiff{f}{x^i} \pardiff{g}{p_i} - \pardiff{g}{x^i} \pardiff{f}{p_i} \right), \]
+	which differs from the usual expression with a minus sign.
+\end{remark}
+
+\begin{definition}
+	$f$ is called a (first) integral fuction if $\dot{f} = 0$ along any trajectories. i.e. $\{f, H\} = 0$.
+\end{definition}
+\begin{corollary}
+	Integral functions form a Lie-subalgebra of the Lie-algebra of smooth functions.
+\end{corollary}
+\begin{proof}
+	This is implied by Jacobi identity.
+\end{proof}
+
+\begin{definition}
+	Canonical transformation $\Phi$ is a transformation preserving the form $\Omega$, i.e. $\Phi^* \Omega = \Omega$.
+\end{definition}
+
+\begin{theorem}
+	Every one-parameter group of canonical transformations $\Phi_t$ is locally generated by a Hamiltonian vector field, i.e. $\Phi = d \Phi_t/ dt|_{t = 0} = \nabla H$ for some Hamiltonian $H$.
+	\label{thm:1-para_cano_transf}
+\end{theorem}
+\begin{proof}
+	content...
+\end{proof}
+
+\subsection{Lie algebra of Sympletic transformations}
+Locally in a Darboux chart, $X := \nabla H = (\pardiff{H}{p_1}, - \pardiff{H}{x^1}, \dots, \pardiff{H}{p_n}, - \pardiff{H}{x^n})$.
+\begin{definition}
+	A sympletic transformation $\Phi$ is a \emph{linear canonical transformation} on $\R^{2n}$ if $\Phi$ is linear, and if $\Phi^* \Omega = \Omega$, where $\Omega = g_{ij} dy^i \wedge dy^j = \sum_{i = 1}^{n} dx^i \wedge dp_i$.
+\end{definition}
+
+For the group of sympletic transformation $\mathrm{Sp(n)}$, there exists a matrix $K \in M_{2n}(\C)$, or $T_{e}\mathrm{Sp}(n)$, such that $X(y) = Ky$ by Thm. \ref{thm:1-para_cano_transf} and the definition. Since $\nabla H = X(y) = Ky$ is a first order differential equation, we can deduce the general solution of Hamiltonian $H$ is a quadratic equation, namely
+\[ H = \frac{1}{2} \sum_{i, j}^{n} \left( a_{ij}x^ix^j + 2b_{ij} x^ip_j + c_{ij}p_ip_j \right), \]
+with $a_{ij} = a_{ji}, c_{ij} = c_{ji}$. From this we can determine the matrix $K$,
+\[K=
+\begin{pmatrix}
+B^t  &&  C \\
+-A   && -B 
+\end{pmatrix}\]
+Hence we have determined the Lie-algebra $\mathrm{sp}(n)$.
+
+\subsection{Lagrange Surface}
+Recall that, given $H = H(x, p)$ and any function $f(x, p, t)$, we have
+\[ \dot{f} = \pardiff{f}{t} + \{ f, H \}. \]
+If we set $f = E = H$, then $\dot{H} = \pardiff{H}{t} + \inner{\nabla H}{\nabla H} = \pardiff{H}{t} = 0$ since the metric is skew-symmetric and $H(x, p)$ time-independent. Now, if $H(x, p, t)$ is time-dependent, we formulate the following definition.
+
+\begin{definition}
+	(Extended phase space when $H$ is time-dependent) Introducing $t$ and $E$ as variables $x^{n+1}$ and $p_{n+1}$, respectively, we will then end up with a new Hamiltonian system $\tilde{H}(x, p, t, E) = H(x, p, t) = E$, since
+	\begin{eqnarray}
+		&&\pardiff{\tilde{H}}{p_{n+1}} = \pardiff{\tilde{H}}{E} = -1 = -\dot{t} = -\dot{x}_{n+1}
+		\nonumber\\
+		&&\pardiff{\tilde{H}}{x^{n+1}} = \pardiff{\tilde{H}}{t} = \dot{E} = \dot{p}_{n+1}.
+		\nonumber
+	\end{eqnarray}
+	In this extented $\R^{2n+2}$ phase space we get
+	\[ \tilde{\Omega} = \Omega - dt \wedge dE = \sum_i dx^i \wedge dp_i - dt \wedge dE. \]
+\end{definition}
+
+\begin{definition}
+	(Lagrange surface) A surface $\Gamma$ of half dimension of the underlying phase space with $\Omega|_{\Gamma} = 0$ is called a \textbf{Lagrange surface}. For example, $x^i = 0$ or $p_i = 0$.
+\end{definition}
+One can observe that if $\Gamma$ is Lagrangian, then the image under any canonical transformation $\Phi(\Omega)$ is Lagrangian as well (as one can notice, the surface $p_i = 0$ is the image of $x^i = 0$ under the canonical mapping $(x, p) \mapsto (p, -x)$).
+
+In typical cases, a Lagrange surface is the \emph{graph} for a differential for some function with respect to the Darboux chart. To see such graph is Lagrangian, consider $\Gamma = \{(x, d\phi)\} = \{(x, p_i = \pardiff{\phi}{x^i})\}$. Then,
+\[\sum dx^i \wedge dp_i = \sum dx^i \wedge d\left(\pardiff{\phi}{x^i}\right) = \sum \frac{\partial^2 \phi}{\partial x^i \partial x^j} dx^i \wedge dx^j, \]
+which must vanish since the wedge product is skew-symmetric while the second-order derivatives are symmetric.
+
+In fact, this typical case composes all of the Lagrange surface.
+\begin{theorem}
+	Every Lagrange surface $\Gamma$ is locally the graph for differential of some function.
+\end{theorem}
+\begin{proof}
+	Locally we have $\Omega = d\eta$ for some one-form $\eta$, e.g. $\eta = -p_i dx^i$ (Darboux's theorem (Thm. \ref{thm:darboux}) and Poincar\'{e}'s lemma (Lemma. \ref{lem:poincare})). By hypothesis, $d(\eta|_p)$ at some point $p$ (i.e. locally). By Poincar\'{e}'s lemma again we have $\eta|_p = d\phi$ for some function (0-form) $\phi$. Therefore we may assume $\Gamma$ is the graph of $d\phi$ over $x$,
+	\[ d\phi = \pardiff{\phi}{x^i} dx^i = \eta|_p  = -p_i dx^i \implies p_i = - \pardiff{\phi}{x^i}. \] 
+\end{proof}
+
+For \emph{classical} Hamiltonian systems, this theorems can give an alternative definition.
+\begin{corollary}
+	\begin{enumerate}
+		\item In the phase space with $H(x, p)$, $\Gamma^n$ ($n$ denotes the dimension) is a Lagrange surface if and only if $\forall Q \in \Gamma^n$ the truncated action $S_0(P) = S_0[\gamma] = \int_{\gamma} pdx$ depends only on the initial point $P$ but not on the choice of curve $\gamma$ joining $P$ and $Q$.
+		\item In the extended phase space with $H(x, p, t)$, $\Gamma^{n+1}$ is a Lagrange surface if and only if the truncated action $S_0(P) = S_0[\gamma] = \int_{\gamma} pdx -Edt$ depends \textbf{locally} only on the initial point $P$ but not on the choice of curve $\gamma$ joining $P$ and $Q$.
+	\end{enumerate}
+	\label{cor:classical_def_lag}
+\end{corollary}
+
+\begin{definition}
+	In the second case of Cor. \ref{cor:classical_def_lag} $S_0(P)$ is called the \textbf{action of a trajecory bundle} and the equation
+	\begin{eqnarray}
+		0 = \pardiff{S}{t} + E(x, p, t) = \pardiff{S}{t} + H(x, \pardiff{S}{x}, t)
+	\end{eqnarray}
+	is said to be the \textbf{Hamilton-Jacobi} equation. 
+\end{definition}
+
+\begin{theorem}
+	Given $H(x, p)$ and $\mathcal{S} := \{H = \text{const.}\}$
+	\begin{enumerate}
+		\item $\nabla H = \left( \pardiff{H}{p}, -\pardiff{H}{x} \right) \in T_P \mathcal{S}$.
+		\item $\inner{\nabla H}{\xi} = 0, \forall \xi \in T_P \mathcal{S}$.
+		\item If $\Gamma^n$ is a Lagrange surface with constant $H$, then any trajectory touching $\Gamma^n$ lies in $\Gamma^n$ entirely.
+	\end{enumerate}
+\end{theorem}
+\begin{proof}
+	For 1. and 2., one first observe that $\xi \in T_p\mathcal{S} \iff \xi^i \partial H / \partial y^i$. Therefore, \[ \inner{\nabla H}{\xi} = g_{ij} g^{ik}\pardiff{H}{y^k} \xi^j = -  \pardiff{H}{y^j}\xi^j = 0. \]
+	In particular, we have $\inner{\nabla H}{\nabla H} = 0$.
+	
+	For 3., let $P$ be a point of intersection and suppose $T_P\mathcal{S}$ has max dimension, i.e. $n$. Then 2. implies that $\nabla H(P) \in T_P\mathcal{S} $ for all such $P$. Hence, if $\gamma$ is a trajectory with $\gamma(0) = p$, then $\dot{\gamma} = \nabla H \in T_P\mathcal{S} \implies \gamma \subset \Gamma^n.$
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%% Exercises %%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Homework 11}
+\subsection{Homework 11} \label{sec:hw11}
 \begin{enumerate}
 	\item (Ex. in pp. 324) Let
 	\begin{eqnarray}
@@ -300,7 +553,7 @@ To further investigate this phenomenon, we consider the general case. Suppose th
 	\item (Ex. 33.4:1) Consider the differential equation \[ \dot{u} = \pardiff{ }{x} \frac{\delta S}{\delta u}, \] on the space of functions $u(x)$ periodic with period $T$, and satisfying \[ \int_{x_0}^{x_0+T} u(x) dx = 0, \] where $S = S[u]$ is a functional of the form \[ S[u] = \int_{x_0}^{x_0+T} L(u, u', \dots) dx. \] Transform the differential equation into standard Hamiltonian form. (Hint: Work with the Fourier coefficients $u_n$ of $u$ determined by $u = \sum_{n = -\infty}^{\infty} u_n e^{(2 \pi i n x)/T} $.)
 	
 	\item (Ex. 25.3:3) For each vector field $X$ define a linear operator $\iota(X)$ on forms by
-	\[ [\iota(X)\omega](X_1, \dots, X_{k-1}) = \omega(X, X_1, \dots, X_{k-1}), \] where $\omega$ is any form of rank $k$, and $X_1, \dots, X_{k-1}$ are arbitrary vector fields.
+	\[ [\iota(X)\omega](X_1, \dots, X_{k-1}) = \omega(X, X_1, \dots, X_{k-1}), \] where $\omega$ is any form of rank $k$, and $X_1, \dots, X_{k-1}$ are arbitrary vector fields.\label{thm:cartan_homo}
 	\begin{enumerate}
 		\item Prove that $\iota(X)$ is \emph{anti-differentiation}, i.e.
 		\[ \iota(X)(\omega_1 \wedge \omega_2) = (\iota(X)\omega_1) \wedge \omega_2 + (-1)^k \omega_1 \wedge (\iota(X)\omega_2), \]
@@ -309,3 +562,27 @@ To further investigate this phenomenon, we consider the general case. Suppose th
 	\end{enumerate}
 \end{enumerate}
 
+\subsection{Homework 12}
+\begin{enumerate}
+	\item (Ex. 33.4:2) Suppose we have a Lagrangian $L$ depending on derivatives higher than the first: $ L = L(u, u', \dots, u^{(n)}), S[u] = \int Ldx. $ Then the Euler-Lagrange equation $\delta S/\delta u = 0$ for the extremals of the functional $S$ can be rewritten in Hamiltonian form as
+	\begin{eqnarray}
+		q'_i = \pardiff{H}{p_i}, && p'_i = \pardiff{H}{q_i}, \hspace{0.3 in} \hbox{$i = 1, \dots, n,$}
+		\nonumber
+	\end{eqnarray}
+	where
+	\begin{eqnarray}
+		q_i = u^(i-1), && p_i = \pardiff{L}{u^{(i)}} + \sum_{s = 1}^{n - i} (-1)^s \diff[n]{ }{x} \pardiff{L}{u^{(i+s)}}, \hspace{0.3 in} \hbox{$i = 1, \dots, n,$}
+		\nonumber
+	\end{eqnarray}
+	provided the equations $p_n = \partial L/\partial q'_n$ can be uniquely solved for $q_n' = u^{(n)}$.
+	
+	\item
+	\begin{enumerate}
+		\item (Ex. 34.4.1) With each vector field $X$ on configuration space (i.e. on the space with coordinate $x$), we associate a function $F_X$ on phase space by defining $F_X = p_i X^i$. Show that $\{F_X, F_Y\} = -F_{[X, Y]}$.
+		\item (Ex. 34.4.2) Let $f = f(x)$ be a function on phase space independent of momentum $p$. Show that $\{ f, F_X \} = \partial_X f$.
+	\end{enumerate}
+
+	\item (Ex. 34.4.7) Let $(g_{ij})$ be a non-singular skew-symmetric matrix. Such a matrix defines in the usual way a \emph{skew} scalar product on the $2n$-dimensional vector space $\R^{2n}$. Prove that any subspace on which the restriction of this skew scalar product is identically zero, has dimension $\leq n$.
+	
+	\item (Ex. in 35.2, pp. 371) Suppose that in phase space $\R^{2n}$ we are given $n$ independent functions $f_1(x, p), \dots, f_n(x, p)$ (i.e. having linearly independent vector-gradients) which pairwise commute: $\{f_i, f_j\} = 0$. Show that the surface in $\R^{2n}$ defined by the $n$ equations $f_1 = 0, \dots, f_n = 0$ is Lagrange.
+\end{enumerate}
